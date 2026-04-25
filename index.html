@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeloxStudio — Fast. Focused. Fixed Price.</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --fg: #e8e8f0;
+    --accent: #ff6b35;
+    --muted: #6b6b7b;
+    --card: #12121a;
+    --border: #1e1e2e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header { padding: 80px 0 40px; text-align: center; }
+  header h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; }
+  header p { font-size: 1.25rem; color: var(--muted); margin-top: 12px; }
+  .tagline { color: var(--accent); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .cta { display: inline-block; margin-top: 32px; background: var(--accent); color: #fff; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+  .cta:hover { transform: translateY(-2px); }
+  section { padding: 60px 0; border-top: 1px solid var(--border); }
+  h2 { font-size: 1.75rem; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--accent); }
+  .card p { color: var(--muted); font-size: 0.95rem; }
+  .price { font-size: 2rem; font-weight: 700; margin: 16px 0 8px; }
+  .price span { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+  ul { list-style: none; margin-top: 12px; }
+  ul li { padding: 4px 0; color: var(--muted); font-size: 0.9rem; }
+  ul li::before { content: "✓"; color: var(--accent); margin-right: 8px; }
+  footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--border); }
+  .highlight { color: var(--accent); }
+  .process { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; }
+  .step { flex: 1; min-width: 200px; }
+  .step-num { font-size: 2rem; font-weight: 800; color: var(--accent); opacity: 0.3; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="tagline">VeloxStudio</div>
+    <h1>Ship your MVP in <span class="highlight">2 weeks</span>.</h1>
+    <p>No hourly billing. No scope creep. No excuses.</p>
+    <p style="margin-top:8px; font-size:1rem; color:var(--muted);">Fixed-price web apps, landing pages, and architecture rescue for founders who need results yesterday.</p>
+    <a href="mailto:kovadev1775899360@outlook.com" class="cta">Get a Quote →</a>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <h2>What we build</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>MVP Sprint</h3>
+        <p>Auth, dashboards, payments, APIs — the core of your app, built fast.</p>
+        <div class="price">$500–2,000 <span>fixed</span></div>
+        <ul>
+          <li>2–4 week delivery</li>
+          <li>React / Next.js / Node.js</li>
+          <li>Stripe + auth included</li>
+          <li>Mobile-first design</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Landing Pages</h3>
+        <p>High-conversion pages that look expensive without the agency price tag.</p>
+        <div class="price">$150–450 <span>fixed</span></div>
+        <ul>
+          <li>1–3 day delivery</li>
+          <li>Custom HTML or no-code</li>
+          <li>GoHighLevel, Webflow, Carrd</li>
+          <li>A/B-ready structure</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Architecture Rescue</h3>
+        <p>Your AI-built MVP is breaking. We stabilize it before it costs you users.</p>
+        <div class="price">$500 <span>audit</span></div>
+        <ul>
+          <li>Security + performance audit</li>
+          <li>Staging / prod separation</li>
+          <li>CI/CD pipeline setup</li>
+          <li>Handoff documentation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Shopify / WordPress</h3>
+        <p>Theme tweaks, custom features, and store optimization.</p>
+        <div class="price">$200–800 <span>fixed</span></div>
+        <ul>
+          <li>Theme customization</li>
+          <li>Speed optimization</li>
+          <li>App integrations</li>
+          <li>Post-launch support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>How it works</h2>
+    <div class="process">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Tell us what you need</h3>
+        <p>15-minute chat or email. No discovery decks, no weeks of back-and-forth.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Get a fixed quote</h3>
+        <p>One price. One timeline. Pay 50% upfront, 50% on delivery.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Ship in 2 weeks</h3>
+        <p>We build fast, you review, we iterate. Live URL + source code handed over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Why founders choose us</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+      <div class="card">
+        <h3>⚡ Speed</h3>
+        <p>Most agencies take 6–8 weeks. We deliver MVPs in 2–4 weeks because we scope aggressively and ship daily.</p>
+      </div>
+      <div class="card">
+        <h3>🔒 Fixed Price</h3>
+        <p>Hourly billing punishes you for asking questions. Fixed price means we absorb the risk, not you.</p>
+      </div>
+      <div class="card">
+        <h3>👥 Founder-First</h3>
+        <p>We speak business, not jargon. You'll get clear updates, not cryptic commit logs.</p>
+      </div>
+      <div class="card">
+        <h3>🎯 Full Ownership</h3>
+        <p>You own the code, the domain, the accounts. We just build it. No lock-in, ever.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container" style="text-align:center;">
+    <h2>Ready to ship?</h2>
+    <p style="color:var(--muted); margin-bottom:24px;">Email us your idea. We'll reply with a one-page scope and a fixed quote within 24 hours.</p>
+    <a href="mailto:kovadev1775899360@outlook.com" class="cta">kovadev1775899360@outlook.com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 VeloxStudio. Built by Kova.</p>
+    <p style="margin-top:4px;">Fixed-price web development for founders who move fast.</p>
+  </div>
+</footer>
+</body>
+</html>

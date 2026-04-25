@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeloxStudio — Lead Dashboard</title>
+<style>
+  :root { --bg:#0a0a0f; --fg:#e8e8f0; --accent:#ff6b35; --muted:#6b6b7b; --card:#12121a; --border:#1e1e2e; --green:#4ade80; --yellow:#facc15; --red:#f87171; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--bg); color:var(--fg); }
+  .container { max-width:1200px; margin:0 auto; padding:24px; }
+  header { display:flex; justify-content:space-between; align-items:center; padding:20px 0; border-bottom:1px solid var(--border); }
+  h1 { font-size:1.5rem; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin:24px 0; }
+  .stat { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; text-align:center; }
+  .stat .num { font-size:2.5rem; font-weight:800; color:var(--accent); }
+  .stat .label { color:var(--muted); font-size:0.85rem; margin-top:4px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; }
+  .lead { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:20px; }
+  .lead .score { display:inline-block; background:var(--accent); color:#fff; padding:2px 10px; border-radius:20px; font-size:0.8rem; font-weight:700; }
+  .lead .source { color:var(--muted); font-size:0.8rem; margin-left:8px; }
+  .lead h3 { font-size:1rem; margin:10px 0 6px; }
+  .lead p { color:var(--muted); font-size:0.85rem; line-height:1.5; }
+  .lead a { color:var(--accent); text-decoration:none; font-size:0.85rem; }
+  .lead a:hover { text-decoration:underline; }
+  .status { display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; margin-top:10px; }
+  .status-new { background:rgba(248,113,113,0.15); color:var(--red); }
+  .status-contacted { background:rgba(250,204,21,0.15); color:var(--yellow); }
+  .status-paid { background:rgba(74,222,128,0.15); color:var(--green); }
+  .section-title { font-size:1.1rem; margin:32px 0 16px; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>VeloxStudio <span style="color:var(--accent)">Lead Dashboard</span></h1>
+    <div style="color:var(--muted);font-size:0.9rem;">Last updated: 2026-04-25</div>
+  </header>
+  
+  <div class="stats">
+    <div class="stat"><div class="num">667</div><div class="label">Total Leads</div></div>
+    <div class="stat"><div class="num">23</div><div class="label">Hot Leads</div></div>
+    <div class="stat"><div class="num">75</div><div class="label">Project-Based</div></div>
+    <div class="stat"><div class="num">0</div><div class="label">Paid Clients</div></div>
+  </div>
+  
+  <div class="section-title">🔥 Top Priority — Contact Today</div>
+  <div class="grid">
+    <div class="lead">
+      <span class="score">35</span><span class="source">Reddit r/forhire</span>
+      <h3>Dating App MVP — £500</h3>
+      <p>Non-technical founder building a UK-focused dating app. Needs profiles, matching, messaging, payments. Wants to launch this year.</p>
+      <a href="https://www.reddit.com/r/forhire/comments/1suq5ud/hiring_technical_cofounder_or_nocode_builder/" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+    <div class="lead">
+      <span class="score">25</span><span class="source">Reddit r/web_design</span>
+      <h3>Market Vendor Portal — $450-650</h3>
+      <p>Market organizer dealing with scammers on Google Forms. Needs branded vendor portal with secure forms and admin dashboard.</p>
+      <a href="https://www.reddit.com/r/web_design/comments/1stj52l/need_some_helpguidance/" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+    <div class="lead">
+      <span class="score">25</span><span class="source">Reddit r/startups</span>
+      <h3>MVP Architecture Rescue — $500</h3>
+      <p>Non-technical founder with AI-built MVP. No tests, shared prod/beta DB, self-managed VPS. Needs audit + stabilization.</p>
+      <a href="https://www.reddit.com/r/startups/comments/1sv8ucs/early_stage_founder_struggling_with_cto_structure/" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+    <div class="lead">
+      <span class="score">22</span><span class="source">Craigslist San Diego</span>
+      <h3>Landing Pages — $150 Fixed</h3>
+      <p>Implement 2 pre-written HTML landing pages in GoHighLevel. Insert photos, wire CTAs, publish. 48h per page. Zelle/Venmo.</p>
+      <a href="https://sandiego.craigslist.org/csd/cpg/d/san-diego-web-designer-needed-html/7928616943.html" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+    <div class="lead">
+      <span class="score">20</span><span class="source">Craigslist LA</span>
+      <h3>PWA to Native App — Fixed Price</h3>
+      <p>Convert Progressive Web Apps (Lovable/AI-built) into Native Apps for Apple/Google stores. Capacitor. Recurring need.</p>
+      <a href="https://losangeles.craigslist.org/lac/cpg/d/los-angeles-local-app-developer-needed/7927340985.html" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+    <div class="lead">
+      <span class="score">18</span><span class="source">Craigslist Brooklyn</span>
+      <h3>Shopify Small Jobs — $200 Package</h3>
+      <p>Small business upgrading to Impulse theme. Needs image resizing, video embed, design tweaks. 2-3 day turnaround.</p>
+      <a href="https://newyork.craigslist.org/brk/crg/d/brooklyn-need-someone-to-help-me-with/7925844081.html" target="_blank">Open Post →</a>
+      <br><span class="status status-new">🔴 NOT CONTACTED</span>
+    </div>
+  </div>
+  
+  <div class="section-title">⚙️ System Status</div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr));">
+    <div class="lead">
+      <h3>Autonomous Harvesters</h3>
+      <p>Reddit (Redlib): ✅ Working<br>Craigslist (20 cities): ✅ Working<br>Dev.to API: ✅ Working<br>GitHub Issues: ✅ Working<br>HN Algolia: ✅ Working<br>RemoteOK: ✅ Working</p>
+    </div>
+    <div class="lead">
+      <h3>Cron Jobs</h3>
+      <p>Redlib Harvester: Every 2 hours<br>Full Pipeline: Every 2 hours<br>Next run: See crontab</p>
+    </div>
+    <div class="lead">
+      <h3>Assets</h3>
+      <p>Landing Page: <a href="https://kovadev17.github.io/veloxstudio-landing/" target="_blank">LIVE</a><br>Outreach Messages: Ready<br>Lead Tracker: Active</p>
+    </div>
+  </div>
+  
+  <footer style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border);margin-top:40px;">
+    <p>VeloxStudio Lead System v4.0 — Built for speed.</p>
+  </footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeloxStudio - Smart Booking Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#faf9f7;--surface:#fff;--surface-2:#f5f5f0;--border:#e8e6e1;
+  --text:#1c1917;--text-dim:#78716c;--primary:#059669;--primary-light:#d1fae5;
+  --accent:#0d9488;--accent-light:#ccfbf1;--gold:#d97706;--gold-light:#fef3c7
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInScale{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@keyframes slideRight{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes pulseSoft{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes dotPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+@keyframes calendarSlide{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.5px}
+.logo span{color:var(--primary)}
+nav{display:flex;gap:8px}
+nav a{padding:8px 16px;border-radius:8px;text-decoration:none;color:var(--text-dim);font-size:14px;font-weight:500;transition:all .2s}
+nav a:hover{background:var(--surface-2);color:var(--text)}
+nav a.active{background:var(--primary);color:#fff}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 20px}
+.page-title{animation:fadeInUp .5s ease}
+.page-title h1{font-size:36px;font-weight:800;margin-bottom:8px;letter-spacing:-1px}
+.page-title p{color:var(--text-dim);font-size:16px}
+
+.booking-grid{display:grid;grid-template-columns:1fr 340px;gap:32px;margin-top:32px}
+.calendar-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;animation:fadeInScale .6s ease;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.calendar-month{font-size:18px;font-weight:700}
+.calendar-nav{display:flex;gap:8px}
+.cal-btn{width:32px;height:32px;border-radius:8px;border:1px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cal-btn:hover{background:var(--surface-2);border-color:var(--primary)}
+
+.weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:8px}
+.weekday{text-align:center;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.5px}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:12px;font-size:14px;font-weight:500;cursor:pointer;transition:all .25s ease;position:relative}
+.day:hover:not(.empty):not(.selected){background:var(--surface-2);transform:scale(1.08)}
+.day.selected{background:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(5,150,105,.3);animation:pulseSoft 2s ease infinite}
+.day.has-slot::after{content:'';position:absolute;bottom:6px;width:4px;height:4px;border-radius:50%;background:var(--primary)}
+.day.empty{color:transparent;cursor:default}
+.day.past{color:var(--text-dim);opacity:.4;cursor:not-allowed}
+
+.time-slots{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;animation:fadeInScale .7s ease .1s both;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.slots-title{font-size:16px;font-weight:700;margin-bottom:6px}
+.slots-sub{color:var(--text-dim);font-size:13px;margin-bottom:20px}
+.slot-list{display:flex;flex-direction:column;gap:10px}
+.time-slot{padding:14px 16px;border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all .2s;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:500}
+.time-slot:hover{border-color:var(--primary);background:var(--primary-light);transform:translateX(4px)}
+.time-slot.selected{border-color:var(--primary);background:var(--primary);color:#fff}
+.slot-status{font-size:12px;padding:4px 10px;border-radius:6px;background:var(--surface-2);color:var(--text-dim);font-weight:600}
+.time-slot.selected .slot-status{background:rgba(255,255,255,.2);color:#fff}
+
+.summary-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;margin-top:20px;animation:fadeInUp .7s ease .2s both}
+.summary-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px}
+.summary-row:last-child{border-bottom:none}
+.summary-label{color:var(--text-dim)}
+.summary-value{font-weight:600}
+.summary-total{padding-top:16px;margin-top:12px;border-top:2px solid var(--text);display:flex;justify-content:space-between;font-size:18px;font-weight:800}
+.confirm-btn{width:100%;margin-top:20px;padding:16px;border-radius:12px;border:none;background:var(--primary);color:#fff;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 4px 15px rgba(5,150,105,.2)}
+.confirm-btn:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(5,150,105,.3)}
+
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:60px 0;animation:fadeInUp .6s ease}
+.feature-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;transition:all .3s}
+.feature-box:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.06);border-color:var(--accent)}
+.feature-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;background:var(--primary-light)}
+.feature-box:nth-child(2) .feature-icon{background:var(--accent-light)}
+.feature-box:nth-child(3) .feature-icon{background:var(--gold-light)}
+.feature-box h3{font-size:16px;font-weight:700;margin-bottom:8px}
+.feature-box p{font-size:14px;color:var(--text-dim);line-height:1.6}
+
+.upcoming-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;margin-top:20px;animation:fadeInUp .7s ease .3s both}
+.upcoming-title{font-size:16px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.upcoming-title::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--primary);animation:dotPulse 2s ease infinite}
+.appt-item{display:flex;align-items:center;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);transition:all .3s;cursor:pointer}
+.appt-item:hover{padding-left:8px}
+.appt-item:last-child{border-bottom:none}
+.appt-avatar{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;animation:float 3s ease infinite}
+.appt-item:nth-child(2) .appt-avatar{animation-delay:.5s;background:linear-gradient(135deg,var(--accent),var(--gold))}
+.appt-item:nth-child(3) .appt-avatar{animation-delay:1s;background:linear-gradient(135deg,var(--gold),#dc2626)}
+.appt-info{flex:1}
+.appt-name{font-weight:600;font-size:14px;margin-bottom:2px}
+.appt-detail{font-size:13px;color:var(--text-dim)}
+.appt-time{font-size:13px;font-weight:600;color:var(--primary);background:var(--primary-light);padding:6px 12px;border-radius:8px}
+
+@media(max-width:900px){.booking-grid{grid-template-columns:1fr}.time-slots{margin-top:20px}.features-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Velox<span>Book</span></div>
+  <nav>
+    <a href="#" class="active">Book Session</a>
+    <a href="#">My Appointments</a>
+    <a href="#">Team Calendar</a>
+  </nav>
+</header>
+<div class="container">
+  <div class="page-title">
+    <h1>Book your session</h1>
+    <p>Select a date and time that works for you. We'll confirm instantly.</p>
+  </div>
+  <div class="booking-grid">
+    <div class="calendar-card">
+      <div class="calendar-header">
+        <div class="calendar-month">April 2026</div>
+        <div class="calendar-nav">
+          <button class="cal-btn">‹</button>
+          <button class="cal-btn">›</button>
+        </div>
+      </div>
+      <div class="weekdays">
+        <div class="weekday">Sun</div><div class="weekday">Mon</div><div class="weekday">Tue</div>
+        <div class="weekday">Wed</div><div class="weekday">Thu</div><div class="weekday">Fri</div><div class="weekday">Sat</div>
+      </div>
+      <div class="days">
+        <div class="day empty"></div><div class="day empty"></div>
+        <div class="day past">1</div><div class="day past">2</div><div class="day past">3</div><div class="day past">4</div><div class="day past">5</div>
+        <div class="day past">6</div><div class="day past">7</div><div class="day past">8</div><div class="day past">9</div><div class="day past">10</div><div class="day past">11</div><div class="day past">12</div>
+        <div class="day past">13</div><div class="day past">14</div><div class="day past">15</div><div class="day past">16</div><div class="day past">17</div><div class="day past">18</div><div class="day past">19</div>
+        <div class="day past">20</div><div class="day past">21</div><div class="day past">22</div><div class="day past">23</div><div class="day past">24</div><div class="day has-slot past">25</div><div class="day has-slot">26</div>
+        <div class="day has-slot selected">27</div><div class="day has-slot">28</div><div class="day has-slot">29</div><div class="day has-slot">30</div>
+        <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div>
+      </div>
+    </div>
+    <div>
+      <div class="time-slots">
+        <div class="slots-title">Available Times</div>
+        <div class="slots-sub">Monday, April 27</div>
+        <div class="slot-list">
+          <div class="time-slot selected">9:00 AM <span class="slot-status">Selected</span></div>
+          <div class="time-slot">10:30 AM <span class="slot-status">Available</span></div>
+          <div class="time-slot">1:00 PM <span class="slot-status">Available</span></div>
+          <div class="time-slot">2:30 PM <span class="slot-status">Available</span></div>
+          <div class="time-slot">4:00 PM <span class="slot-status">Available</span></div>
+        </div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-row"><span class="summary-label">Service</span><span class="summary-value">Strategy Call</span></div>
+        <div class="summary-row"><span class="summary-label">Duration</span><span class="summary-value">45 minutes</span></div>
+        <div class="summary-row"><span class="summary-label">Date</span><span class="summary-value">Apr 27, 2026</span></div>
+        <div class="summary-row"><span class="summary-label">Time</span><span class="summary-value">9:00 AM EST</span></div>
+        <div class="summary-total"><span>Total</span><span>Free</span></div>
+        <button class="confirm-btn">Confirm Booking</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-box">
+      <div class="feature-icon">🔔</div>
+      <h3>Smart Reminders</h3>
+      <p>Email and SMS reminders sent automatically. Reduce no-shows by 70% with intelligent follow-ups.</p>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">🎯</div>
+      <h3>Team Scheduling</h3>
+      <p>Round-robin assignment, collective availability, and buffer time between meetings. Built for teams.</p>
+    </div>
+    <div class="feature-box">
+      <div class="feature-icon">📱</div>
+      <h3>Embed Anywhere</h3>
+      <p>Drop the booking widget on your site, in emails, or share a link. Works on every device.</p>
+    </div>
+  </div>
+
+  <div class="upcoming-card">
+    <div class="upcoming-title">Upcoming Appointments</div>
+    <div class="appt-item">
+      <div class="appt-avatar">JD</div>
+      <div class="appt-info"><div class="appt-name">John Doe</div><div class="appt-detail">Product Strategy Call</div></div>
+      <div class="appt-time">Today, 2 PM</div>
+    </div>
+    <div class="appt-item">
+      <div class="appt-avatar">SM</div>
+      <div class="appt-info"><div class="appt-name">Sarah Miller</div><div class="appt-detail">Design Review</div></div>
+      <div class="appt-time">Apr 28, 10 AM</div>
+    </div>
+    <div class="appt-item">
+      <div class="appt-avatar">AK</div>
+      <div class="appt-info"><div class="appt-name">Alex Kim</div><div class="appt-detail">Onboarding Session</div></div>
+      <div class="appt-time">Apr 29, 3 PM</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

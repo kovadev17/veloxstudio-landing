@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VeloxStudio - AI Content Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05070a;--surface:#0d1117;--surface-hover:#161b22;--border:#21262d;
+  --text:#e6edf3;--text-dim:#8b949e;--primary:#f0883e;--primary-glow:#f0883e33;
+  --accent:#58a6ff;--accent-glow:#58a6ff33;--success:#3fb950;--violet:#a371f7
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInScale{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes typeCursor{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulseRing{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.6);opacity:0}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes morphBlob{0%,100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}50%{border-radius:30% 60% 70% 40%/50% 60% 30% 60%}}
+
+.gradient-text{background:linear-gradient(90deg,var(--primary),var(--violet),var(--accent),var(--primary));background-size:300% 300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:gradientShift 6s ease infinite}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,var(--primary-glow),transparent 70%);top:-200px;left:-200px;animation:float 8s ease infinite}
+.hero::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,var(--accent-glow),transparent 70%);bottom:-150px;right:-150px;animation:float 10s ease infinite reverse}
+
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:13px;font-weight:500;color:var(--text-dim);margin-bottom:28px;animation:fadeInUp .6s ease}
+.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--success);position:relative}
+.badge-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--success);animation:pulseRing 2s ease infinite}
+
+.hero h1{font-size:64px;font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:20px;animation:fadeInUp .7s ease .1s both;max-width:900px}
+.hero p{font-size:20px;color:var(--text-dim);max-width:560px;line-height:1.6;margin-bottom:40px;animation:fadeInUp .7s ease .2s both}
+
+.hero-cta{display:flex;gap:16px;animation:fadeInUp .7s ease .3s both}
+.btn{padding:14px 32px;border-radius:12px;border:none;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s ease}
+.btn-primary{background:linear-gradient(135deg,var(--primary),#e16f2a);color:#fff;box-shadow:0 8px 30px var(--primary-glow)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--primary-glow)}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(10px)}
+.btn-ghost:hover{background:var(--surface-hover);border-color:var(--primary)}
+
+.demo-section{padding:100px 20px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:60px;animation:fadeInUp .6s ease}
+.section-header h2{font-size:40px;font-weight:800;margin-bottom:12px;letter-spacing:-1px}
+.section-header p{color:var(--text-dim);font-size:17px;max-width:500px;margin:0 auto}
+
+.prompt-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:40px;animation:fadeInUp .7s ease .1s both;position:relative;overflow:hidden}
+.prompt-box::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.02),transparent);animation:shimmer 4s infinite}
+.prompt-label{font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-weight:600}
+.prompt-input{background:#010409;border:1px solid var(--border);border-radius:10px;padding:16px;font-size:15px;color:var(--text);font-family:'Inter',monospace;position:relative}
+.typing-text::after{content:'|';animation:typeCursor 1s step-end infinite;color:var(--primary);margin-left:2px}
+
+.output-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.output-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;transition:all .4s ease;animation:fadeInScale .5s ease backwards;position:relative;overflow:hidden}
+.output-card:nth-child(1){animation-delay:.2s}
+.output-card:nth-child(2){animation-delay:.3s}
+.output-card:nth-child(3){animation-delay:.4s}
+.output-card:hover{transform:translateY(-6px);border-color:var(--primary);box-shadow:0 20px 50px rgba(240,136,62,.1)}
+.output-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--violet));transform:scaleX(0);transition:transform .4s ease;transform-origin:left}
+.output-card:hover::before{transform:scaleX(1)}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;background:var(--primary-glow)}
+.card-title{font-size:16px;font-weight:700;margin-bottom:8px}
+.card-desc{font-size:14px;color:var(--text-dim);line-height:1.6}
+.card-meta{display:flex;gap:12px;margin-top:16px;font-size:12px;color:var(--text-dim)}
+.meta-tag{padding:4px 10px;background:var(--bg);border-radius:6px;border:1px solid var(--border)}
+
+.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin:80px 0}
+.feature-content{animation:fadeInUp .7s ease}
+.feature-content h3{font-size:32px;font-weight:800;margin-bottom:16px;letter-spacing:-.5px}
+.feature-content p{color:var(--text-dim);font-size:16px;line-height:1.7;margin-bottom:24px}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.feature-list li{display:flex;align-items:center;gap:12px;font-size:15px}
+.feature-list li::before{content:'✓';width:22px;height:22px;border-radius:6px;background:var(--success);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.feature-visual{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;animation:fadeInScale .8s ease;position:relative}
+.visual-blob{position:absolute;width:200px;height:200px;background:linear-gradient(135deg,var(--primary-glow),var(--accent-glow));filter:blur(60px);border-radius:50%;animation:morphBlob 8s ease infinite;z-index:0}
+.metric-card{background:rgba(13,17,23,.8);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;z-index:1;backdrop-filter:blur(10px);margin-bottom:16px;transition:all .3s}
+.metric-card:hover{transform:translateX(8px);border-color:var(--primary)}
+.metric-value{font-size:28px;font-weight:800;background:linear-gradient(90deg,var(--primary),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.metric-label{font-size:13px;color:var(--text-dim);margin-top:4px}
+
+.stats-bar{display:flex;justify-content:center;gap:60px;padding:60px 20px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:60px 0;animation:fadeInUp .6s ease}
+.stat{text-align:center}
+.stat-num{font-size:48px;font-weight:800;background:linear-gradient(135deg,var(--text),var(--text-dim));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{color:var(--text-dim);font-size:14px;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+
+.footer{text-align:center;padding:60px 20px;color:var(--text-dim);font-size:14px}
+
+@media(max-width:768px){.hero h1{font-size:36px}.output-grid{grid-template-columns:1fr}.feature-row{grid-template-columns:1fr;gap:30px}.stats-bar{flex-direction:column;gap:30px}}
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span>AI-Powered Content Engine</div>
+  <h1>Generate <span class="gradient-text">production-ready</span> content in seconds</h1>
+  <p>From blog posts to ad copy to full documentation. Our AI understands your brand voice and scales with your team.</p>
+  <div class="hero-cta">
+    <button class="btn btn-primary">Start Free Trial</button>
+    <button class="btn btn-ghost">View Demo</button>
+  </div>
+</section>
+
+<section class="demo-section">
+  <div class="section-header">
+    <h2>See it in action</h2>
+    <p>Type a prompt. Get three variants. Pick the winner.</p>
+  </div>
+  <div class="prompt-box">
+    <div class="prompt-label">Your Prompt</div>
+    <div class="prompt-input"><span class="typing-text">Write a landing page headline for a B2B SaaS analytics tool</span></div>
+  </div>
+  <div class="output-grid">
+    <div class="output-card">
+      <div class="card-icon">✨</div>
+      <div class="card-title">Variant A - Bold</div>
+      <div class="card-desc">"Stop Guessing. Start Growing. Real-time analytics that turn your data into revenue decisions."</div>
+      <div class="card-meta"><span class="meta-tag">Confidence: 94%</span><span class="meta-tag">Tone: Bold</span></div>
+    </div>
+    <div class="output-card">
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Variant B - Professional</div>
+      <div class="card-desc">"The Analytics Platform Trusted by 500+ Revenue Teams. Make data-backed decisions without the data team."</div>
+      <div class="card-meta"><span class="meta-tag">Confidence: 91%</span><span class="meta-tag">Tone: Formal</span></div>
+    </div>
+    <div class="output-card">
+      <div class="card-icon">🔥</div>
+      <div class="card-title">Variant C - Aspirational</div>
+      <div class="card-desc">"Every Metric That Matters. One Dashboard. Zero Setup. See what your data has been trying to tell you."</div>
+      <div class="card-meta"><span class="meta-tag">Confidence: 89%</span><span class="meta-tag">Tone: Aspirational</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-bar">
+  <div class="stat"><div class="stat-num">10M+</div><div class="stat-label">Words Generated</div></div>
+  <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Active Teams</div></div>
+  <div class="stat"><div class="stat-num">2.3s</div><div class="stat-label">Avg Generation</div></div>
+  <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Uptime</div></div>
+</section>
+
+<section class="demo-section">
+  <div class="feature-row">
+    <div class="feature-content">
+      <h3>Real-time performance metrics</h3>
+      <p>Track every generation, compare variants, and see which content drives actual conversions. Our dashboard gives you visibility into what works.</p>
+      <ul class="feature-list">
+        <li>A/B test tracking built-in</li>
+        <li>Conversion attribution per variant</li>
+        <li>Team usage and quota analytics</li>
+        <li>Export to CSV, PDF, or API</li>
+      </ul>
+    </div>
+    <div class="feature-visual">
+      <div class="visual-blob"></div>
+      <div class="metric-card"><div class="metric-value">94.2%</div><div class="metric-label">Content engagement rate</div></div>
+      <div class="metric-card"><div class="metric-value">2.4x</div><div class="metric-label">Faster than manual writing</div></div>
+      <div class="metric-card"><div class="metric-value">$12,400</div><div class="metric-label">Estimated monthly savings</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">
+  Built by VeloxStudio. Previous client work under NDA.
+</div>
+</body>
+</html>

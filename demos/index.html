@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeloxStudio - Live Demos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0f;
+            --surface: #111118;
+            --border: #252532;
+            --text: #e8e8ec;
+            --text-muted: #6b6b7b;
+            --accent: #6366f1;
+            --accent-2: #8b5cf6;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100dvh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+        header { text-align: center; margin-bottom: 60px; }
+        .logo {
+            width: 56px; height: 56px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-radius: 14px;
+            display: grid; place-items: center;
+            font-size: 24px; font-weight: 700;
+            margin: 0 auto 24px;
+        }
+        h1 { font-size: 42px; font-weight: 700; letter-spacing: -1px; margin-bottom: 12px; }
+        .subtitle { font-size: 18px; color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+        .demos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .demo-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .demo-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 40px rgba(99,102,241,0.15);
+        }
+        .demo-preview {
+            height: 180px;
+            display: grid; place-items: center;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .demo-preview::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 0%, var(--surface) 100%);
+        }
+        .demo-preview.saas { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .demo-preview.ai { background: linear-gradient(135deg, #d97757, #6a9bcc); }
+        .demo-preview.booking { background: linear-gradient(135deg, #2d6a4f, #40916c); }
+        .demo-info { padding: 24px; }
+        .demo-tag {
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .demo-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+        .demo-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+        .cta-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 48px;
+            text-align: center;
+        }
+        .cta-section h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .cta-section p { color: var(--text-muted); margin-bottom: 24px; }
+        .cta-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px; font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(99,102,241,0.3); }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+        @media (max-width: 900px) {
+            .demos-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">V</div>
+            <h1>VeloxStudio Live Demos</h1>
+            <p class="subtitle">Interactive prototypes built for modern startups. Click any demo to explore.</p>
+        </header>
+        <div class="demos-grid">
+            <a href="./saas/" class="demo-card">
+                <div class="demo-preview saas">&#128202;</div>
+                <div class="demo-info">
+                    <div class="demo-tag">SaaS Dashboard</div>
+                    <div class="demo-title">Analytics Platform</div>
+                    <div class="demo-desc">Real-time revenue tracking, user metrics, conversion analytics, and transaction management for SaaS businesses.</div>
+                </div>
+            </a>
+            <a href="./ai/" class="demo-card">
+                <div class="demo-preview ai">&#129302;</div>
+                <div class="demo-info">
+                    <div class="demo-tag">AI Platform</div>
+                    <div class="demo-title">Content Studio</div>
+                    <div class="demo-desc">AI-powered content generation with tone controls, SEO optimization, and multi-format output for marketing teams.</div>
+                </div>
+            </a>
+            <a href="./booking/" class="demo-card">
+                <div class="demo-preview booking">&#128197;</div>
+                <div class="demo-info">
+                    <div class="demo-tag">Scheduling</div>
+                    <div class="demo-title">Booking System</div>
+                    <div class="demo-desc">Calendar management, appointment scheduling, client tracking, and revenue analytics for service businesses.</div>
+                </div>
+            </a>
+        </div>
+        <div class="cta-section">
+            <h2>Need something custom?</h2>
+            <p>We build production-ready web applications for startups and growing businesses. Fast turnaround, fixed pricing.</p>
+            <a href="mailto:kovadevV@proton.me" class="cta-btn">Get in Touch</a>
+        </div>
+        <div class="footer">
+            Built by VeloxStudio. All demos are interactive prototypes.
+        </div>
+    </div>
+</body>
+</html>
